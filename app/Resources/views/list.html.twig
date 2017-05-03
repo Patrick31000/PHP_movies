@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %} {% block title %}Film Listing{% endblock %} {% block body %}
+<table class="table table-striped">
+    <th>Title</th>
+    <th>Summary</th>
+    <th>Director</th>
+    <th>Category</th>
+    <!--<th>Release Date</th>
+    <th>Poster</th>-->
+    {% for movie in movies %}
+    <tr>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.summary }}</td>
+        <td>{{ movie.director }}</td>
+        <td>{{ movie.category }}</td>
+    </tr>
+    {% endfor %}
+</table>{% endblock %}
