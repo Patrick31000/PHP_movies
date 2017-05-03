@@ -40,13 +40,6 @@ class movies
      *
      * @ORM\Column(name="duration", type="datetime")
      */
-    private $duration;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="director", type="string", length=255)
-     */
     private $director;
 
     /**
@@ -66,7 +59,7 @@ class movies
     /**
      * @var string
      *
-     * @ORM\Column(name="poster", type="string", length=255)
+     * @ORM\Column(name="poster", type="string", length=255, nullable=true)
      */
     private $poster;
 
@@ -127,30 +120,6 @@ class movies
     public function getSummary()
     {
         return $this->summary;
-    }
-
-    /**
-     * Set duration
-     *
-     * @param \DateTime $duration
-     *
-     * @return movies
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-
-    /**
-     * Get duration
-     *
-     * @return \DateTime
-     */
-    public function getDuration()
-    {
-        return $this->duration;
     }
 
     /**
