@@ -40,7 +40,7 @@ class DefaultController extends Controller
       $form = $this->createFormBuilder($movies)
       ->add('title', TextType::class)
       ->add('summary', TextType::class)
-      ->add('duration', TextType::class)
+     
       ->add('director', TextType::class)
       ->add('crelease_date', TextType::class)
       ->add('poster', TextType::class)

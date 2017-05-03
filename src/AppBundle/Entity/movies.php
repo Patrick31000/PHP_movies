@@ -36,9 +36,9 @@ class movies
     private $summary;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="duration", type="datetime")
+     * @ORM\Column(name="director", type="string", length=255)
      */
     private $director;
 
