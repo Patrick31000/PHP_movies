@@ -14,6 +14,4 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-composer.json
-composer.lock
 

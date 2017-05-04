@@ -15,50 +15,66 @@ use AppBundle\Entity\movies;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/movies")
+     * @Route("/movies", name="movies")
      */
     public function indexAction(Request $request)
     {
-        $film=$this->getDoctrine()->getRepository('AppBundle:movies');
-        $films=$film->findAll();
+      $film=$this->getDoctrine()->getRepository('AppBundle:movies');
+      $films=$film->findAll();
         // replace this example code with whatever you need
-        return $this->render('list.html.twig', array(
+      return $this->render('./list.html.twig', array(
         'movies' => $films,
-      ));
+        ));
     }
-
-    public function editAction($slug, Request $request)
-    {
-      $movies = $this->getDoctrine()
-      ->getRepository('AppBundle:movies')
-      ->find($slug);
-      if (!$todo) {
-        throw $this->createNotFoundException(
-          'No todo found for id '.$slug
-        );
-      }
-      $form = $this->createFormBuilder($movies)
-      ->add('title', TextType::class)
-      ->add('summary', TextType::class)
-     
-      ->add('director', TextType::class)
-      ->add('crelease_date', TextType::class)
-      ->add('poster', TextType::class)
-      ->add('save', SubmitType::class, array('label' => 'Modify movies'))
-      ->getForm();
-      $form->handleRequest($request);
-      if ($form->isSubmitted() && $form->isValid()) {
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
-        return $this->redirectToRoute('movies');
-      }
-      return $this->render('movies/form.html.twig', array(
-        'form' => $form->createView(),
-      ));
-    }
-    /**
-    * Matches /todo_delete/*
+/**
+    * Matches /movie_edit/*
     *
-    * @Route("/todo_delete/{slug}", name="todo_delete")
+    * @Route("/movie_edit/{slug}", name="movie_edit")
     */
+public function editAction($slug, Request $request)
+{
+  $movies = $this->getDoctrine()
+  ->getRepository('AppBundle:movies')
+  ->find($slug);
+  if (!$movies) {
+    throw $this->createNotFoundException(
+      'No todo found for id '.$slug
+      );
+  }
+  $form = $this->createFormBuilder($movies)
+  ->add('title', TextType::class)
+  ->add('summary', TextType::class)
+  ->add('director', TextType::class)
+  ->add('save', SubmitType::class, array('label' => 'Modify movies'))
+  ->getForm();
+  $form->handleRequest($request);
+  if ($form->isSubmitted() && $form->isValid()) {
+    $em = $this->getDoctrine()->getManager();
+    $em->flush();
+    return $this->redirectToRoute('movies');
+  }
+  return $this->render('form.html.twig', array(
+    'form' => $form->createView(),
+    ));
+}
+ /**
+    * Matches /movie_delete/*
+    *
+    * @Route("/movie_delete/{slug}", name="movie_delete")
+    */
+ public function deleteAction($slug)
+ {
+  $movies = $this->getDoctrine()
+  ->getRepository('AppBundle:movies')
+  ->find($slug);
+  if (!$movies) {
+    throw $this->createNotFoundException(
+      'No movie found for id '.$slug
+      );
+  }
+  $em = $this->getDoctrine()->getManager();
+  $em->remove($movies);
+  $em->flush();
+  return $this->redirectToRoute('movies');
+}
 }
