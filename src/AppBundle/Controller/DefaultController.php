@@ -19,12 +19,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $film=$this->getDoctrine()->getRepository('AppBundle:movies');
-        $films=$film->findAll();
+      $film=$this->getDoctrine()->getRepository('AppBundle:movies');
+      $films=$film->findAll();
         // replace this example code with whatever you need
-        return $this->render('list.html.twig', array(
+      return $this->render('list.html.twig', array(
         'movies' => $films,
-      ));
+        ));
     }
 
     public function editAction($slug, Request $request)
@@ -35,14 +35,14 @@ class DefaultController extends Controller
       if (!$todo) {
         throw $this->createNotFoundException(
           'No todo found for id '.$slug
-        );
+          );
       }
       $form = $this->createFormBuilder($movies)
       ->add('title', TextType::class)
       ->add('summary', TextType::class)
-     
+      
       ->add('director', TextType::class)
-      ->add('crelease_date', TextType::class)
+      ->add('release_date', TextType::class)
       ->add('poster', TextType::class)
       ->add('save', SubmitType::class, array('label' => 'Modify movies'))
       ->getForm();
@@ -54,11 +54,11 @@ class DefaultController extends Controller
       }
       return $this->render('movies/form.html.twig', array(
         'form' => $form->createView(),
-      ));
+        ));
     }
     /**
     * Matches /todo_delete/*
     *
     * @Route("/todo_delete/{slug}", name="todo_delete")
     */
-}
+  }

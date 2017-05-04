@@ -1,17 +1,24 @@
 {% extends 'base.html.twig' %} {% block title %}Film Listing{% endblock %} {% block body %}
-<table class="table table-striped">
-    <th>Title</th>
-    <th>Summary</th>
-    <th>Director</th>
-    <th>Category</th>
-    <!--<th>Release Date</th>
-    <th>Poster</th>-->
-    {% for movie in movies %}
-    <tr>
-        <td>{{ movie.title }}</td>
-        <td>{{ movie.summary }}</td>
-        <td>{{ movie.director }}</td>
-        <td>{{ movie.category }}</td>
-    </tr>
-    {% endfor %}
-</table>{% endblock %}
+
+{% for movie in movies %}
+<div style="display: flex">
+    <div class="card" style="width: 20rem;border: 1px black solid">
+        {% if movie.poster %}
+        <img class="card-img-top" src="{{ movie.poster }}" alt="Card image cap">
+        {% else %}
+        <img class="card-img-top" src="http://placehold.it/100x50" alt="Card image cap">
+        {% endif %}
+        <div class="card-block">
+            <h4 class="card-title">{{ movie.title }}</h4>
+            <p class="card-text">{{ movie.director }}</p>
+            <p class="card-text">{{ movie.category }}</p>
+        </div>
+
+        <div class="card-block">
+            <a href="{{ movie.poster }}" class="card-link">{{ movie.title }}</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
