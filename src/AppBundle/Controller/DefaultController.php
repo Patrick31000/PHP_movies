@@ -15,6 +15,20 @@ use AppBundle\Entity\movies;
 class DefaultController extends Controller
 {
     /**
+     * @Route("/admin")
+     */
+    public function adminAction(Request $request)
+    {
+      $film=$this->getDoctrine()->getRepository('AppBundle:movies');
+      $films=$film->findAll();
+        // replace this example code with whatever you need
+      return $this->render('list.html.twig', array(
+        'movies' => $films,
+        ));
+    }
+
+
+    /**
      * @Route("/movies", name="movies")
      */
     public function indexAction(Request $request)
