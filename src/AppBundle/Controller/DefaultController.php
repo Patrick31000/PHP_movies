@@ -28,6 +28,7 @@ class DefaultController extends Controller
     }
 /**
     * Matches /movie_edit/*
+
     *
     * @Route("/movie_edit/{slug}", name="movie_edit")
     */

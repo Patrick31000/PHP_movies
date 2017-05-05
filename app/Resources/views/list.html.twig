@@ -1,18 +1,29 @@
-{% extends 'base.html.twig' %} {% block title %}Film Listing{% endblock %} {% block body %}
-<table class="table table-striped">
-    <th>Title</th>
 
-    <th>Director</th>
-    <th>Category</th>
+{% extends 'base.html.twig' %}
 
-    {% for movie in movies %}
-    <tr>
+{% block title %}Film Listing{% endblock %}
 
-        <td><a href="/movie_edit/{{ movie.id }}">{{ movie.title }}</a></td> 
 
-        <td>{{ movie.director }}</td>
-        <td>{{ movie.category }}</td>
-        <td><button><a href="/movie_delete/{{ movie.id }}"/>delete</span></button></td>
-    </tr>
-    {% endfor %}
-</table>{% endblock %}
+{% block body %}
+
+<div class="ui container grid">
+	{% for movie in movies %}
+	<div class="three wide column">
+		<div class="ui card">
+			<img class="ui centered tiny image" src="{{ movie.poster }}" alt="{{ movie.title }}">
+			<div class="content">
+				<div class="meta">
+					<span class="title"><strong>{{ movie.title }}</strong></span><br><br>
+					<span class="description">{{ movie.director }}</span>
+					<span class="description">{{ movie.category }}</span>
+				</div>
+			</div>
+			<div class="extra content">
+				<a class="right floated" href="{{ movie.poster }}">{{ movie.title }}</a>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
