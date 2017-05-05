@@ -2,27 +2,75 @@
 
 {% block title %}Film Listing{% endblock %}
 
+{% block style %}
+<style>
+	.card{
+		transform: rotateX(0deg);
+		transition: .4s;
+	}
+	.returned {
+		transform: rotateX(180deg);
+		transition: .3s;
+	}
+</style>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.js" integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg=" crossorigin="anonymous"></script>
+<script>
+	var nb = 0;
+	$('.back').toggle();
+	$('.movie')
+	.each(function(){
+		$(this).attr('id', nb++);
+	});
+	$('.movie')
+	.click(function() {
+		var id = $(this).attr('id');
+		$('.movie').each(function() {
+			if ($(this).attr('id') == id) {
+				$(this).toggleClass('returned');
+				$(this).children('.ui.card')
+				.toggle();
+				$(this).children('.ui.card.summary')
+				.toggle();
+			} else if ($(this).attr('class').includes('returned')) {
+				$(this).toggleClass('returned');
+				$(this).children('.ui.card')
+				.toggle();
+				$(this).children('.ui.card.summary')
+				.toggle();
+			}
+		})
+	})
+</script>
+{% endblock %}
 
 {% block body %}
-
-<div class="ui container grid">
+<div class="ui container cards">
 	{% for movie in movies %}
-	<div class="three wide column">
-		<div class="ui card">
-				<img class="ui centered tiny image" src="{{ movie.poster }}" alt="{{ movie.title }}">
+	<div class="movie">
+		<div class="ui card front">
+			<img class="ui centered tiny image" src="{{ movie.poster }}" onerror="this.src='http://placehold.it/40x60?text=pas d\'image'" alt="{{ movie.title }}">
 			<div class="content">
 				<div class="meta">
 					<span class="title"><strong>{{ movie.title }}</strong></span><br><br>
+					<span class="description">{{ movie.category }}</span><br>
 					<span class="description">{{ movie.director }}</span>
-					<span class="description">{{ movie.category }}</span>
 				</div>
 			</div>
-			<div class="extra content">
-				<a class="right floated" href="{{ movie.poster }}">{{ movie.title }}</a>
+			<!-- <div class="extra content">
+				<a href="{{ movie.poster }}">{{ movie.title }}</a>
+			</div> -->
+		</div>
+		<div class="ui card back">
+			<div class="content">
+				<div class="meta">
+					<span class="description">{{ movie.summary }}</span>
+				</div>
 			</div>
 		</div>
 	</div>
 	{% endfor %}
 </div>
-
 {% endblock %}
