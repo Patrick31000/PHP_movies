@@ -17,6 +17,7 @@ class DefaultController extends Controller
 
 
 
+
     /**
      * @Route("/movies", name="movies")
      */

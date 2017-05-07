@@ -12,6 +12,7 @@ security:
                     ryan:
                         password: ryanpass
                         roles: 'ROLE_USER'
+
                     admin:
                         password: kitten
                         roles: 'ROLE_ADMIN'
@@ -27,6 +28,9 @@ security:
 
         main:
             anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
             # activate different ways to authenticate
 
             # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -38,5 +42,7 @@ security:
            
 
     access_control:
+        - { path: ^/movies, roles: ROLE_USER}
+        - { path: ^/movies, roles: ROLE_ADMIN}
         - { path: ^/admin, roles: ROLE_ADMIN }
 
