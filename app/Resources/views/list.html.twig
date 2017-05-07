@@ -59,16 +59,15 @@
 
 {% block body %}
 
-
 <div class="ui container cards">
 	<div class="ui card front">
 		<select class="align center ui dropdown">
 			<option value="" href="/movies">Select Category</option>
-			<option value="Sci-Fi & Fantasy" href="/movies?category=Sci-Fi&Fantasy">Sci-Fi & Fantasy</option>
-			<option value="Action & Adventure" href="/movies?category=Action&Adventure">Action & Adventure</option>
+			<option value="Sci-Fi%26Fantasy" href="/movies?category=Sci-Fi%26Fantasy">Sci-Fi & Fantasy</option>
+			<option value="Action%26Adventure" href="/movies?category=Action%26Adventure">Action & Adventure</option>
 			<option value="Thriller" href="/movies?category=Thriller">Thriller</option>
 			<option value="Comedy" href="/movies?category=Comedy">Comedy</option>
-			<option value="Kids & Family" href="/movies?category=Kids&Family">Kids & Family</option>
+			<option value="Kids%26Family" href="/movies?category=Kids%26Family">Kids & Family</option>
 			<option value="Drama" href="/movies?category=Drama">Drama</option>
 			<option value="Western" href="/movies?category=Western">Western</option>
 			<option value="Musicals" href="/movies?category=Musicals">Musicals</option>
@@ -82,14 +81,14 @@
 	</div>
 
 	{% for movie in movies %}
-	{% if (app.request.query.get("category") == movie.category) or (app.request.query.get("category") is empty) %}
+	{% if (app.request.query.get("category") == movie.category|replace({' ':''})) or (app.request.query.get("category") is empty) %}
 	<div class="movie">
 		<div class="ui card front">
 			<img class="ui centered tiny image" src="{{ movie.poster }}" onerror="this.src='http://placehold.it/40x60?text=pas d\'image'" alt="{{ movie.title }}">
 			<div class="content">
 				<div class="meta">
 					<span class="title"><strong>{{ movie.title }}</strong></span><br><br>
-					<span class="description">{{ movie.category }}</span><br>
+					<span class="description">{{ movie.category|replace({' ':''}) }}</span><br>
 					<span class="description">by {{ movie.director }}</span>
 				</div>
 			</div>
