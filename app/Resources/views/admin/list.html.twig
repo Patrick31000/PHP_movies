@@ -43,11 +43,16 @@
 			}
 		})
 	})
+	$('#deco').on('click', function(){
+		console.log('coucou')
+		document.location.href = '/login';
+	})
 </script>
 {% endblock %}
 
 {% block body %}
 
+<button class="ui red button" id="deco" href="/login">Deconnexion</button>
 
 <div class="ui container cards">
 	{% for movie in movies %}
