@@ -16,9 +16,7 @@
 {% endblock %}
 
 {% block javascripts %}
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.js" integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
 <script>
 	var nb = 0;
 	$('.back').toggle();
@@ -44,15 +42,6 @@
 				.toggle();
 			}
 		})
-	});
-	$('.ui.dropdown')
-	.dropdown({
-		useLabels: false,
-		maxSelections: 3
-	});
-
-	$('#search').on('click', function(){
-		document.location.href = $('option:selected').attr('href');
 	})
 </script>
 {% endblock %}
@@ -61,28 +50,7 @@
 
 
 <div class="ui container cards">
-	<div class="ui card front">
-		<select class="align center ui dropdown">
-			<option value="" href="/movies">Select Category</option>
-			<option value="Sci-Fi & Fantasy" href="/movies?category=Sci-Fi&Fantasy">Sci-Fi & Fantasy</option>
-			<option value="Action & Adventure" href="/movies?category=Action&Adventure">Action & Adventure</option>
-			<option value="Thriller" href="/movies?category=Thriller">Thriller</option>
-			<option value="Comedy" href="/movies?category=Comedy">Comedy</option>
-			<option value="Kids & Family" href="/movies?category=Kids&Family">Kids & Family</option>
-			<option value="Drama" href="/movies?category=Drama">Drama</option>
-			<option value="Western" href="/movies?category=Western">Western</option>
-			<option value="Musicals" href="/movies?category=Musicals">Musicals</option>
-			<option value="Romance" href="/movies?category=Romance">Romance</option>
-			<option value="Music Documentaries" href="/movies?category=MusicDocumentaries">Music Documentaries</option>
-			<option value="Independent" href="/movies?category=Independent">Independent</option>
-			<option value="Horror" href="/movies?category=Horror">Horror</option>
-			<option value="Documentary" href="/movies?category=Documentary">Documentary</option>
-		</select>
-		<button id="search">GOOOOO</button>
-	</div>
-
 	{% for movie in movies %}
-	{% if (app.request.query.get("category") == movie.category) or (app.request.query.get("category") is empty) %}
 	<div class="movie">
 		<div class="ui card front">
 			<img class="ui centered tiny image" src="{{ movie.poster }}" onerror="this.src='http://placehold.it/40x60?text=pas d\'image'" alt="{{ movie.title }}">
@@ -90,7 +58,9 @@
 				<div class="meta">
 					<span class="title"><strong>{{ movie.title }}</strong></span><br><br>
 					<span class="description">{{ movie.category }}</span><br>
-					<span class="description">by {{ movie.director }}</span>
+					<span class="description">{{ movie.director }}</span>
+					<button><a href="/movie_edit/{{ movie.id }}">edit</a></button>
+					<button><a href="/movie_delete/{{ movie.id }}"/>delete</a></button>
 				</div>
 			</div>
 			<!-- <div class="extra content">
@@ -105,8 +75,6 @@
 			</div>
 		</div>
 	</div>
-
-	{% endif %}
 	{% endfor %}
 </div>
 {% endblock %}

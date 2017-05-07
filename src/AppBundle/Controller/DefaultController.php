@@ -14,6 +14,9 @@ use AppBundle\Entity\movies;
 
 class DefaultController extends Controller
 {
+
+
+
     /**
      * @Route("/movies", name="movies")
      */
@@ -22,13 +25,25 @@ class DefaultController extends Controller
       $film=$this->getDoctrine()->getRepository('AppBundle:movies');
       $films=$film->findAll();
         // replace this example code with whatever you need
-      return $this->render('./list.html.twig', array(
+      return $this->render('/list.html.twig', array(
+        'movies' => $films,
+        ));
+
+    }  
+     /**
+     * @Route("/admin", name="admin")
+     */
+     public function adminAction(Request $request)
+     {
+      $film=$this->getDoctrine()->getRepository('AppBundle:movies');
+      $films=$film->findAll();
+        // replace this example code with whatever you need
+      return $this->render('admin/list.html.twig', array(
         'movies' => $films,
         ));
     }
 /**
     * Matches /movie_edit/*
-
     *
     * @Route("/movie_edit/{slug}", name="movie_edit")
     */
@@ -52,9 +67,9 @@ public function editAction($slug, Request $request)
   if ($form->isSubmitted() && $form->isValid()) {
     $em = $this->getDoctrine()->getManager();
     $em->flush();
-    return $this->redirectToRoute('movies');
+    return $this->redirectToRoute('admin');
   }
-  return $this->render('form.html.twig', array(
+  return $this->render('./admin/form.html.twig', array(
     'form' => $form->createView(),
     ));
 }
@@ -76,6 +91,6 @@ public function editAction($slug, Request $request)
   $em = $this->getDoctrine()->getManager();
   $em->remove($movies);
   $em->flush();
-  return $this->redirectToRoute('movies');
+  return $this->redirectToRoute('admin');
 }
 }
