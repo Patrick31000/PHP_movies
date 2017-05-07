@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block javascripts %}
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.js" integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
 <script>
 	var nb = 0;
@@ -53,11 +53,16 @@
 	$('#search').on('click', function(){
 		document.location.href = $('option:selected').attr('href');
 	})
+
+	$('#deco').on('click', function(){
+		console.log('coucou')
+		document.location.href = '/login';
+	})
 </script>
 {% endblock %}
 
 {% block body %}
-
+<button class="ui red button" id="deco" href="/login">Deconnexion</button>
 <div class="ui container cards">
 	<div class="ui card front">
 		<select class="align center ui dropdown">
