@@ -59,7 +59,8 @@
 					<span class="title"><strong>{{ movie.title }}</strong></span><br><br>
 					<span class="description">{{ movie.category }}</span><br>
 					<span class="description">{{ movie.director }}</span>
-					
+					<button><a href="/movie_edit/{{ movie.id }}">edit</a></button>
+					<button><a href="/movie_delete/{{ movie.id }}"/>delete</a></button>
 				</div>
 			</div>
 			<!-- <div class="extra content">
